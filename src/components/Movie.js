@@ -1,13 +1,13 @@
 import React from 'react'
+import movieStyle from '../css/movieStyle.module.css'
 
 function Movie(props) {
     return (
         
-            <li>
+            <li className={movieStyle.movieListItem}>
                 <img src={props.movie.Poster} alt="Movie poster"/>
                 <h2>{props.movie.Title}</h2>
-                <p>{props.movie.Year}</p>
-                <p>{props.movie.Type}</p>
+                <p>{props.movie.Year} | <span>{props.movie.Type}</span></p>
             </li>
         
     )

@@ -1,0 +1,17 @@
+.hidden {
+    display: none;
+}
+
+.title, .formWrapper, .errorMessage, footer {
+    text-align: center;
+}
+
+h2 {
+    font-size: 18px;
+    width: 80%;
+}
+
+img {
+    max-width: 100%;
+    width: 200px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import MovieList from './MovieList'
+import '../css/globalStyle.css'
 
 class MovieAPI extends Component {
     constructor(props) {
@@ -9,31 +10,39 @@ class MovieAPI extends Component {
         this.state = {
              movies: []
         }
-
-        console.log(this.state.movies);
     }
 
-    fetchMovies = async (searchString) => {
+    async componentDidMount() {
+            let url = ("http://www.omdbapi.com/?apikey=72e2b6a0&s=batman&type=");
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setState({
+                movies: data.Search
+            })
+            console.log(url);
+    }
+
+    fetchMovies = async (searchString, movieType) => {
         try {
             let errorMessage = document.getElementById("error-message");
             let movieList = document.getElementById("movie-list");
-            let url = ("http://www.omdbapi.com/?apikey=72e2b6a0&s=" + searchString);
+            let url = ("http://www.omdbapi.com/?apikey=72e2b6a0&s=" + searchString + "&type=" + movieType);
             const response = await fetch(url);
             const data = await response.json();
             if(data.Response === "False") {
-                errorMessage.style.display = "block";
-                movieList.style.display = "none";
+                errorMessage.classList.remove("hidden");
+                movieList.classList.add("hidden");
                 return errorMessage.innerText = `${data.Error}`;
             } else {
-                errorMessage.style.display = "none";
-                movieList.style.display = "block";
+                errorMessage.classList.add("hidden");
+                movieList.classList.remove("hidden");
                 this.setState({
                     movies: data.Search
-                });
+                })
             }
             console.log(this.state.movies);
             // console.log(this.state.movies.Error);
-            console.log(this.state.movies.Response);
+            console.log(url);
         } catch (error) {
             console.log(error);
         }
@@ -42,7 +51,7 @@ class MovieAPI extends Component {
     
     render() {
         return (
-            <div>
+            <div className="main-wrap">
                 <Form fetchMovies={this.fetchMovies} />
                 <MovieList movies={this.state.movies} />
             </div>

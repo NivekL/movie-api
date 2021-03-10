@@ -5,28 +5,42 @@ export class Form extends Component {
         super(props)
     
         this.state = {
-             movieInput: ''
+             movieInput: 'batman',
+             genre: ''
         }
     }
 
+    // componentDidMount() {
+       
+    //     this.props.fetchMovies(this.state.movieInput, this.state.genre);
+    //     console.log(this.state.movieInput);
+    // }
+
     handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
+        const target = event.target;
+        const name   = target.name;
+        const value  = target.type === 'checkbox' ? target.checked : target.value;
 
         this.setState({
             [name]: value
         });
 
-        this.props.fetchMovies(value);
+        this.props.fetchMovies(this.state.movieInput, this.state.genre);
         console.log(value);
 
     }
     
     render() {
         return (
-            <div>
+            <div className="formWrapper">
                 <form>
                     <input name="movieInput" type="text" value={this.state.movieInput} onChange={this.handleChange} placeholder="type in a movie title..."/>
+                    <select name="genre" value={this.state.genre} onChange={this.handleChange}>
+                        <option value="">All</option>
+                        <option value="movie">Movie</option>
+                        <option value="series">Series</option>
+                        <option value="episode">Episode</option>
+                    </select>
                 </form>
             </div>
         )
