@@ -8,8 +8,9 @@ function MovieList(props) {
             <p id="error-message" className="errorMessage"></p>
             <ul id="movie-list" className={movieListStyle.listWrapper}>
                 {
-                    props.movies.map( (item) => {
-                        return <Movie key={item.imdbID} movie={item} />
+                    props.movies.map( (movie) => {
+                        // console.log(movie.imdbID);
+                        return <Movie key={movie.imdbID} movie={movie} />
                     })
                 }
             </ul>

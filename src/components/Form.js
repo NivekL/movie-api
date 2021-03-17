@@ -10,23 +10,19 @@ export class Form extends Component {
         }
     }
 
-    // componentDidMount() {
-       
-    //     this.props.fetchMovies(this.state.movieInput, this.state.genre);
-    //     console.log(this.state.movieInput);
-    // }
-
     handleChange = (event) => {
         const target = event.target;
         const name   = target.name;
-        const value  = target.type === 'checkbox' ? target.checked : target.value;
+        const value  = target.value;
 
-        this.setState({
-            [name]: value
-        });
-
-        this.props.fetchMovies(this.state.movieInput, this.state.genre);
-        console.log(value);
+        this.setState(
+            {[name]: value},
+            () => {
+                this.props.fetchMovies(this.state.movieInput, this.state.genre);
+                console.log(this.state.movieInput);
+                console.log(this.state.genre);
+            }
+        );
 
     }
     
@@ -39,7 +35,7 @@ export class Form extends Component {
                         <option value="">All</option>
                         <option value="movie">Movie</option>
                         <option value="series">Series</option>
-                        <option value="episode">Episode</option>
+                        <option value="game">Game</option>
                     </select>
                 </form>
             </div>
