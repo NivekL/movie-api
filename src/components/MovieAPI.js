@@ -27,7 +27,7 @@ class MovieAPI extends Component {
             if(data.Response === "False") {
                 errorMessage.classList.remove("hidden");
                 movieList.classList.add("hidden");
-                return errorMessage.innerText = `${data.Error}`;
+                return errorMessage.innerText = data.Error;
             } else {
                 errorMessage.classList.add("hidden");
                 movieList.classList.remove("hidden");

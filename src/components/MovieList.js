@@ -9,7 +9,6 @@ function MovieList(props) {
             <ul id="movie-list" className={movieListStyle.listWrapper}>
                 {
                     props.movies.map( (movie) => {
-                        // console.log(movie.imdbID);
                         return <Movie key={movie.imdbID} movie={movie} />
                     })
                 }
