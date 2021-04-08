@@ -5,10 +5,9 @@ import movieListStyle from '../css/movieListStyle.module.css'
 function MovieList(props) {
     return (
         <div>
-            <p id="error-message" className="errorMessage"></p>
             <ul id="movie-list" className={movieListStyle.listWrapper}>
                 {
-                    props.movies.map( (movie) => {
+                    props.movies && props.movies.map( (movie) => {
                         return <Movie key={movie.imdbID} movie={movie} />
                     })
                 }

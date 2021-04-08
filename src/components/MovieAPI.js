@@ -8,7 +8,8 @@ class MovieAPI extends Component {
         super(props)
     
         this.state = {
-             movies: []
+             movies: [],
+             error: ''
         }
     }
 
@@ -18,23 +19,15 @@ class MovieAPI extends Component {
 
     fetchMovies = async (searchString, movieType) => {
         try {
-            let errorMessage = document.getElementById("error-message");
-            let movieList = document.getElementById("movie-list");
             let url = ("http://www.omdbapi.com/?apikey=72e2b6a0&s=" + searchString + "&type=" + movieType);
             const response = await fetch(url);
             const data = await response.json();
 
-            if(data.Response === "False") {
-                errorMessage.classList.remove("hidden");
-                movieList.classList.add("hidden");
-                return errorMessage.innerText = data.Error;
-            } else {
-                errorMessage.classList.add("hidden");
-                movieList.classList.remove("hidden");
-                this.setState({
-                    movies: data.Search
-                })
-            }
+            this.setState({
+                movies: data.Search,
+                error: data.Error
+            })
+
             console.log(this.state.movies);
             // console.log(this.state.movies.Error);
             console.log(url);
@@ -47,6 +40,7 @@ class MovieAPI extends Component {
     render() {
         return (
             <div className="main-wrap">
+                <p className="errorMessage">{this.state.error}</p>
                 <Form fetchMovies={this.fetchMovies} />
                 <MovieList movies={this.state.movies} />
             </div>

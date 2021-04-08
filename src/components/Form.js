@@ -30,7 +30,7 @@ export class Form extends Component {
         return (
             <div className="formWrapper">
                 <form>
-                    <input name="movieInput" type="text" value={this.state.movieInput} onChange={this.handleChange} placeholder="type in a movie title..."/>
+                    <input autoComplete='off' name="movieInput" type="text" value={this.state.movieInput} onChange={this.handleChange} placeholder="type in a movie title..."/>
                     <select name="genre" value={this.state.genre} onChange={this.handleChange}>
                         <option value="">All</option>
                         <option value="movie">Movie</option>
